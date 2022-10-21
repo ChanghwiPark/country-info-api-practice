@@ -1,25 +1,61 @@
-import logo from './logo.svg';
-import './App.css';
+import styled from "styled-components";
+import { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import CountryItem from "./components/CountryItem";
+import { Pagination } from 'antd';
+import { getCountryFlag } from "./apis";
 
-function App() {
+export default function App() {
+  const [page, setPage] = useState(1);
+  const [total, setTotal] = useState(1);
+
+  const { data, error, isLoading } = useQuery(['country', page], () => getCountryFlag(page), {
+    onSuccess: (response) => {
+      setTotal(response.totalCount) // @todo 어디서 온 건지 공부
+    }
+  })
+
+  if (isLoading){
+    return <div>Give me a few seconds...</div>
+  }
+    
+
+  if (error instanceof Error){
+    return <span>{error.message}</span>
+  }
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <AppContainer>
+      <SearchBarContainer>
+
+      </SearchBarContainer>
+      <Main>
+        {
+          data.data.map((item) => (
+            <CountryItem
+              countryName={item.country_nm}
+            />
+          ))
+        }
+      </Main>
+      <Pagination
+        defaultCurrent={page}
+        total = {total}
+        onChange = {(page) => setPage(page)}
+      />
+    </AppContainer>
   );
 }
 
-export default App;
+const AppContainer = styled.div`
+
+`
+
+const SearchBarContainer = styled.div`
+
+`
+
+const Main = styled.main`
+
+`
