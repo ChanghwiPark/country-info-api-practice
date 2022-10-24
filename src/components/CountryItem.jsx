@@ -68,13 +68,11 @@ const CountryItemContainer = styled.div`
     width: 500px;
     height: 350px;
     padding: 16px;
-
     .containerDescription{
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
-
         h2 {
             width: 100%;
             text-align: center;
@@ -84,12 +82,10 @@ const CountryItemContainer = styled.div`
             border-radius: 17px;
             padding: 0px 8px;
         }
-
         a {
             z-index: 99;
         }
     }
-
     img {
         width: 100%;
     }

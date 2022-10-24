@@ -11,7 +11,7 @@ export const getCountryFlag = async (page, numOnPage) => {
             params: {
                 ServiceKey: FLAG_API_KEY,
                 returnType: "JSON",
-                numOfRows: {numOnPage},
+                numOfRows: { numOnPage },
                 pageNo: page
             }
         })

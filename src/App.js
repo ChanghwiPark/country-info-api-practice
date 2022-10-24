@@ -58,7 +58,7 @@ export default function App() {
         <Pagination
           defaultCurrent={page}
           total = {total}
-          defaultPageSize={numOnPage}
+          defaultPageSize={20}
           onChange = {(page) => setPage(page)}
         />
       </PaginationContainer>
@@ -67,7 +67,6 @@ export default function App() {
 }
 
 const AppContainer = styled.div`
-
 `
 
 const SearchBarContainer = styled.div`
